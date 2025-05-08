@@ -78,4 +78,23 @@ public class TestStringSchema {
         assertFalse(schema.isValid("thing"));
         assertTrue(schema.isValid("something"));
     }
+
+    @Test
+    void requiredLatestTest() {
+        schema.minLength(3).contains("some").required();
+
+        assertFalse(schema.isValid(null));
+        assertFalse(schema.isValid(""));
+    }
+
+    @Test
+    void callValidatorsSeveralTimeTest() {
+        schema.required();
+
+        schema.contains("some").minLength(3);
+        assertTrue(schema.isValid("some"));
+
+        schema.contains("thing").minLength(5);
+        assertFalse(schema.isValid("some"));
+    }
 }
