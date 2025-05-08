@@ -12,7 +12,7 @@ public class StringSchema implements Schema<String> {
     private final LinkedHashMap<String, ValidationProperty<?, String>> linkedHashMap = new LinkedHashMap<>();
 
     public StringSchema required() {
-        linkedHashMap.put("required", new ValidationProperty<>(true, notNullTest));
+        linkedHashMap.putFirst("required", new ValidationProperty<>(true, notNullTest));
         return this;
     }
 
