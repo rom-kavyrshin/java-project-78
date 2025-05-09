@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestMapSchema {
 
-    MapSchema schema;
+    MapSchema mapSchema;
 
     @BeforeEach
     void beforeEach() {
-        schema = new Validator().map();
+        mapSchema = new Validator().map();
     }
 
     @Test
@@ -23,57 +23,57 @@ class TestMapSchema {
         var nonEmptyMap = new HashMap<String, String>();
         nonEmptyMap.put("firstKey", "firstValue");
 
-        assertTrue(schema.isValid(null));
-        assertTrue(schema.isValid(new HashMap<>()));
-        assertTrue(schema.isValid(nonEmptyMap));
+        assertTrue(mapSchema.isValid(null));
+        assertTrue(mapSchema.isValid(new HashMap<>()));
+        assertTrue(mapSchema.isValid(nonEmptyMap));
 
-        schema.required();
+        mapSchema.required();
 
-        assertFalse(schema.isValid(null));
-        assertTrue(schema.isValid(new HashMap<>()));
-        assertTrue(schema.isValid(nonEmptyMap));
+        assertFalse(mapSchema.isValid(null));
+        assertTrue(mapSchema.isValid(new HashMap<>()));
+        assertTrue(mapSchema.isValid(nonEmptyMap));
     }
 
     @Test
     void testSizeof() {
         var testMap = new HashMap<String, String>();
 
-        assertTrue(schema.isValid(testMap));
+        assertTrue(mapSchema.isValid(testMap));
 
-        schema.sizeof(2);
+        mapSchema.sizeof(2);
 
-        assertFalse(schema.isValid(testMap));
+        assertFalse(mapSchema.isValid(testMap));
         testMap.put("firstKey", "firstValue");
-        assertFalse(schema.isValid(testMap));
+        assertFalse(mapSchema.isValid(testMap));
 
         testMap.put("secondKey", "secondValue");
-        assertTrue(schema.isValid(testMap));
+        assertTrue(mapSchema.isValid(testMap));
 
         testMap.put("thirdKey", "thirdValue");
-        assertFalse(schema.isValid(testMap));
+        assertFalse(mapSchema.isValid(testMap));
     }
 
     @Test
     void testComplexSchema() {
         var testMap = new HashMap<String, String>();
-        assertTrue(schema.isValid(null));
+        assertTrue(mapSchema.isValid(null));
 
-        schema.required();
+        mapSchema.required();
 
-        assertFalse(schema.isValid(null));
-        assertTrue(schema.isValid(testMap));
+        assertFalse(mapSchema.isValid(null));
+        assertTrue(mapSchema.isValid(testMap));
 
-        schema.sizeof(2);
+        mapSchema.sizeof(2);
 
-        assertFalse(schema.isValid(testMap));
+        assertFalse(mapSchema.isValid(testMap));
         testMap.put("firstKey", "firstValue");
-        assertFalse(schema.isValid(testMap));
+        assertFalse(mapSchema.isValid(testMap));
         testMap.put("secondKey", "secondValue");
-        assertTrue(schema.isValid(testMap));
+        assertTrue(mapSchema.isValid(testMap));
 
-        assertFalse(schema.isValid(null));
-        assertFalse(schema.isValid(new HashMap<>()));
-        assertTrue(schema.isValid(testMap));
+        assertFalse(mapSchema.isValid(null));
+        assertFalse(mapSchema.isValid(new HashMap<>()));
+        assertTrue(mapSchema.isValid(testMap));
     }
 
     @Test
@@ -81,25 +81,25 @@ class TestMapSchema {
         var testMap = new HashMap<String, String>();
         testMap.put("firstKey", "firstValue");
 
-        schema.sizeof(1).required();
+        mapSchema.sizeof(1).required();
 
-        assertFalse(schema.isValid(null));
-        assertTrue(schema.isValid(testMap));
+        assertFalse(mapSchema.isValid(null));
+        assertTrue(mapSchema.isValid(testMap));
     }
 
     @Test
     void callValidatorsSeveralTimeTest() {
         var testMap = new HashMap<String, String>();
-        schema.required().sizeof(1);
+        mapSchema.required().sizeof(1);
 
-        assertFalse(schema.isValid(testMap));
+        assertFalse(mapSchema.isValid(testMap));
         testMap.put("firstKey", "firstValue");
-        assertTrue(schema.isValid(testMap));
+        assertTrue(mapSchema.isValid(testMap));
 
-        schema.sizeof(2);
+        mapSchema.sizeof(2);
 
-        assertFalse(schema.isValid(testMap));
+        assertFalse(mapSchema.isValid(testMap));
         testMap.put("secondKey", "secondValue");
-        assertTrue(schema.isValid(testMap));
+        assertTrue(mapSchema.isValid(testMap));
     }
 }
