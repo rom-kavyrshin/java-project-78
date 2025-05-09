@@ -4,12 +4,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
-public class MapSchema extends BaseSchema<Map<String, String>> {
+public class MapSchema extends BaseSchema<Map<String, Object>> {
 
-    private final BiPredicate<Integer, Map<String, String>> notNullTest = (ignore, test) -> test != null;
-    private final BiPredicate<Integer, Map<String, String>> sizeofTest = (exactSize, test) -> test.size() == exactSize;
+    private final BiPredicate<Integer, Map<String, Object>> notNullTest = (ignore, test) -> test != null;
+    private final BiPredicate<Integer, Map<String, Object>> sizeofTest = (exactSize, test) -> test.size() == exactSize;
 
-    private final LinkedHashMap<String, ValidationProperty<?, Map<String, String>>> linkedHashMap =
+    private final LinkedHashMap<String, ValidationProperty<?, Map<String, Object>>> linkedHashMap =
             new LinkedHashMap<>();
 
     public MapSchema required() {
@@ -27,7 +27,7 @@ public class MapSchema extends BaseSchema<Map<String, String>> {
     }
 
     @Override
-    public boolean isValid(Map<String, String> stringStringMap) {
+    public boolean isValid(Map<String, Object> stringStringMap) {
         return linkedHashMap.values()
                 .stream()
                 .allMatch(it -> it.test(stringStringMap));

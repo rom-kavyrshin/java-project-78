@@ -20,7 +20,7 @@ class TestMapSchema {
 
     @Test
     void testRequired() {
-        var nonEmptyMap = new HashMap<String, String>();
+        var nonEmptyMap = new HashMap<String, Object>();
         nonEmptyMap.put("firstKey", "firstValue");
 
         assertTrue(mapSchema.isValid(null));
@@ -36,7 +36,7 @@ class TestMapSchema {
 
     @Test
     void testSizeof() {
-        var testMap = new HashMap<String, String>();
+        var testMap = new HashMap<String, Object>();
 
         assertTrue(mapSchema.isValid(testMap));
 
@@ -55,7 +55,7 @@ class TestMapSchema {
 
     @Test
     void testComplexSchema() {
-        var testMap = new HashMap<String, String>();
+        var testMap = new HashMap<String, Object>();
         assertTrue(mapSchema.isValid(null));
 
         mapSchema.required();
@@ -78,7 +78,7 @@ class TestMapSchema {
 
     @Test
     void requiredLatestTest() {
-        var testMap = new HashMap<String, String>();
+        var testMap = new HashMap<String, Object>();
         testMap.put("firstKey", "firstValue");
 
         mapSchema.sizeof(1).required();
@@ -89,7 +89,7 @@ class TestMapSchema {
 
     @Test
     void callValidatorsSeveralTimeTest() {
-        var testMap = new HashMap<String, String>();
+        var testMap = new HashMap<String, Object>();
         mapSchema.required().sizeof(1);
 
         assertFalse(mapSchema.isValid(testMap));
