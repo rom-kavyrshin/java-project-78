@@ -33,6 +33,6 @@ public class NumberSchema extends BaseSchema<Integer> {
     public boolean isValid(Integer number) {
         return linkedHashMap.values()
                 .stream()
-                .allMatch((it) -> it.test(number));
+                .allMatch(it -> it.test(number));
     }
 }

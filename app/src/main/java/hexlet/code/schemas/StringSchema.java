@@ -30,6 +30,6 @@ public class StringSchema extends BaseSchema<String> {
     public boolean isValid(String s) {
         return linkedHashMap.values()
                 .stream()
-                .allMatch((it) -> it.test(s));
+                .allMatch(it -> it.test(s));
     }
 }
