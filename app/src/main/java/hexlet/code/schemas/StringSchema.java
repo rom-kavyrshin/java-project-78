@@ -3,7 +3,7 @@ package hexlet.code.schemas;
 import java.util.LinkedHashMap;
 import java.util.function.BiPredicate;
 
-public class StringSchema implements Schema<String> {
+public class StringSchema extends BaseSchema<String> {
 
     private final BiPredicate<Boolean, String> notNullTest = (ignore, test) -> test != null && !test.isEmpty();
     private final BiPredicate<Integer, String> minLengthTest = (minLength, test) -> test.length() >= minLength;
