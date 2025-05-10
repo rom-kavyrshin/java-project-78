@@ -42,7 +42,9 @@ public class MapSchema extends BaseSchema {
 
     @Override
     public boolean isValid(Object object) {
-        if (!(object instanceof Map) && object != null) return false;
+        if (!(object instanceof Map) && object != null) {
+            return false;
+        }
 
         return linkedHashMap.values()
                 .stream()

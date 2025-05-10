@@ -31,7 +31,9 @@ public class NumberSchema extends BaseSchema {
 
     @Override
     public boolean isValid(Object object) {
-        if (!(object instanceof Integer) && object != null) return false;
+        if (!(object instanceof Integer) && object != null) {
+            return false;
+        }
 
         return linkedHashMap.values()
                 .stream()

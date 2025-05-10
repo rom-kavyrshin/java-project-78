@@ -28,7 +28,9 @@ public class StringSchema extends BaseSchema {
 
     @Override
     public boolean isValid(Object object) {
-        if (!(object instanceof String) && object != null) return false;
+        if (!(object instanceof String) && object != null) {
+            return false;
+        }
 
         return linkedHashMap.values()
                 .stream()
