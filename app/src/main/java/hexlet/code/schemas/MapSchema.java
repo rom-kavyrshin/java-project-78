@@ -8,6 +8,19 @@ public class MapSchema extends BaseSchema {
 
     private final BiPredicate<Integer, Map<String, Object>> notNullTest = (ignore, test) -> test != null;
     private final BiPredicate<Integer, Map<String, Object>> sizeofTest = (exactSize, test) -> test.size() == exactSize;
+    private final BiPredicate<Map<String, BaseSchema>, Map<String, Object>> shapeTest =
+            (schemas, test) -> {
+                return test.entrySet()
+                        .stream()
+                        .allMatch(it -> {
+                            var schemaForObject = schemas.get(it.getKey());
+                            if (schemaForObject != null) {
+                                return schemaForObject.isValid(it.getValue());
+                            } else {
+                                return false;
+                            }
+                        });
+            };
 
     private final LinkedHashMap<String, ValidationProperty<?, Map<String, Object>>> linkedHashMap =
             new LinkedHashMap<>();
@@ -22,7 +35,8 @@ public class MapSchema extends BaseSchema {
         return this;
     }
 
-    public MapSchema shape(Map<String, BaseSchema<?>> schemas) {
+    public MapSchema shape(Map<String, BaseSchema> schemas) {
+        linkedHashMap.put("shape", new ValidationProperty<>(schemas, shapeTest));
         return this;
     }
 
