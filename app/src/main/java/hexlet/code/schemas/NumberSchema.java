@@ -5,7 +5,7 @@ import hexlet.code.Pair;
 import java.util.LinkedHashMap;
 import java.util.function.BiPredicate;
 
-public class NumberSchema extends BaseSchema {
+public class NumberSchema extends BaseSchema<Integer> {
 
     private final BiPredicate<Integer, Integer> notNullTest = (ignore, test) -> test != null;
     private final BiPredicate<Integer, Integer> positiveTest = (minLength, test) -> test > 0;

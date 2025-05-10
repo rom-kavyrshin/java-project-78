@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
-public class MapSchema extends BaseSchema {
+public class MapSchema extends BaseSchema<Map<String, Object>> {
 
     private final BiPredicate<Integer, Map<String, Object>> notNullTest = (ignore, test) -> test != null;
     private final BiPredicate<Integer, Map<String, Object>> sizeofTest = (exactSize, test) -> test.size() == exactSize;
