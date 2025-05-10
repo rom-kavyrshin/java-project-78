@@ -58,7 +58,7 @@ class TestMapSchema {
 
     @Test
     void testShapeWrongKeys() {
-        var schemas = new HashMap<String, BaseSchema<?>>();
+        var schemas = new HashMap<String, BaseSchema>();
         var testMap = new HashMap<String, Object>();
 
         assertTrue(mapSchema.isValid(testMap));
@@ -84,7 +84,7 @@ class TestMapSchema {
 
     @Test
     void testShapeExtended() {
-        var schemas = new HashMap<String, BaseSchema<?>>();
+        var schemas = new HashMap<String, BaseSchema>();
         var testMap = new HashMap<String, Object>();
 
         assertTrue(mapSchema.isValid(testMap));
@@ -116,7 +116,7 @@ class TestMapSchema {
 
     @Test
     void testWrongTypeInShape() {
-        var schemas = new HashMap<String, BaseSchema<?>>();
+        var schemas = new HashMap<String, BaseSchema>();
         var testMap = new HashMap<String, Object>();
 
         schemas.put("firstName", validator.string().required());

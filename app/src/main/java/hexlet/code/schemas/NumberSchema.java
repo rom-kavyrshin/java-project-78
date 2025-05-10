@@ -5,7 +5,7 @@ import hexlet.code.Pair;
 import java.util.LinkedHashMap;
 import java.util.function.BiPredicate;
 
-public class NumberSchema extends BaseSchema<Integer> {
+public class NumberSchema extends BaseSchema {
 
     private final BiPredicate<Integer, Integer> notNullTest = (ignore, test) -> test != null;
     private final BiPredicate<Integer, Integer> positiveTest = (minLength, test) -> test > 0;
@@ -30,9 +30,11 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     @Override
-    public boolean isValid(Integer number) {
+    public boolean isValid(Object object) {
+        if (!(object instanceof Integer) && object != null) return false;
+
         return linkedHashMap.values()
                 .stream()
-                .allMatch(it -> it.test(number));
+                .allMatch(it -> it.test((Integer) object));
     }
 }

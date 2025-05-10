@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
-public class MapSchema extends BaseSchema<Map<String, Object>> {
+public class MapSchema extends BaseSchema {
 
     private final BiPredicate<Integer, Map<String, Object>> notNullTest = (ignore, test) -> test != null;
     private final BiPredicate<Integer, Map<String, Object>> sizeofTest = (exactSize, test) -> test.size() == exactSize;
@@ -27,9 +27,11 @@ public class MapSchema extends BaseSchema<Map<String, Object>> {
     }
 
     @Override
-    public boolean isValid(Map<String, Object> stringStringMap) {
+    public boolean isValid(Object object) {
+        if (!(object instanceof Map) && object != null) return false;
+
         return linkedHashMap.values()
                 .stream()
-                .allMatch(it -> it.test(stringStringMap));
+                .allMatch(it -> it.test((Map) object));
     }
 }
