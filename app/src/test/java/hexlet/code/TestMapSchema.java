@@ -115,6 +115,22 @@ class TestMapSchema {
     }
 
     @Test
+    void testWrongTypeInShape() {
+        var schemas = new HashMap<String, BaseSchema<?>>();
+        var testMap = new HashMap<String, Object>();
+
+        schemas.put("firstName", validator.string().required());
+        schemas.put("lastName", validator.string().required().minLength(2));
+
+        mapSchema.required().sizeof(2).shape(schemas);
+
+        testMap.put("firstName", "John");
+        testMap.put("lastName", 25);
+
+        assertFalse(mapSchema.isValid(testMap));
+    }
+
+    @Test
     void testComplexSchema() {
         var testMap = new HashMap<String, Object>();
         assertTrue(mapSchema.isValid(null));
