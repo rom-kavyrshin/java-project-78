@@ -179,4 +179,12 @@ class TestMapSchema {
         testMap.put("secondKey", "secondValue");
         assertTrue(mapSchema.isValid(testMap));
     }
+
+    @Test
+    void testWrongType() {
+        var testMap = new HashMap<String, Object>();
+
+        assertFalse(mapSchema.isValid("something"));
+        assertTrue(mapSchema.isValid(testMap));
+    }
 }

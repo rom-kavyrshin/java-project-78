@@ -104,4 +104,13 @@ class TestNumberSchema {
         assertFalse(schema.isValid(7));
         assertTrue(schema.isValid(22));
     }
+
+    @Test
+    void testWrongType() {
+        schema.required();
+
+        schema.range(5, 10).positive();
+        assertFalse(schema.isValid("something"));
+        assertTrue(schema.isValid(7));
+    }
 }

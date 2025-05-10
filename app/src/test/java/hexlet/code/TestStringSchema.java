@@ -97,4 +97,13 @@ class TestStringSchema {
         schema.contains("thing").minLength(5);
         assertFalse(schema.isValid("some"));
     }
+
+    @Test
+    void testWrongType() {
+        schema.required();
+
+        schema.contains("some").minLength(3);
+        assertFalse(schema.isValid(3));
+        assertTrue(schema.isValid("something"));
+    }
 }
