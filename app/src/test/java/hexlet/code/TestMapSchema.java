@@ -58,7 +58,7 @@ class TestMapSchema {
 
     @Test
     void testShapeWrongKeys() {
-        var schemas = new HashMap<String, BaseSchema>();
+        var schemas = new HashMap<String, BaseSchema<String>>();
         var testMap = new HashMap<String, Object>();
 
         assertTrue(mapSchema.isValid(testMap));
@@ -84,20 +84,20 @@ class TestMapSchema {
 
     @Test
     void testShapeExtended() {
-        var schemas = new HashMap<String, BaseSchema>();
+        var schemas = new HashMap<String, BaseSchema<String>>();
         var testMap = new HashMap<String, Object>();
 
         assertTrue(mapSchema.isValid(testMap));
 
         schemas.put("firstName", validator.string().required());
         schemas.put("lastName", validator.string().required().minLength(2));
-        schemas.put("age", validator.number().required().range(21, 30));
+        schemas.put("age", validator.string().required().contains("twenty"));
 
         mapSchema.required().sizeof(3).shape(schemas);
 
         testMap.put("firstName", null);
         testMap.put("lastName", "Lenon");
-        testMap.put("age", 25);
+        testMap.put("age", "twenty five");
         assertFalse(mapSchema.isValid(testMap));
 
         testMap.put("firstName", "John");
@@ -108,15 +108,15 @@ class TestMapSchema {
         testMap.put("lastName", "Lenon");
         assertTrue(mapSchema.isValid(testMap));
 
-        testMap.put("age", 31);
+        testMap.put("age", "thirty one");
         assertFalse(mapSchema.isValid(testMap));
-        testMap.put("age", 25);
+        testMap.put("age", "twenty five");
         assertTrue(mapSchema.isValid(testMap));
     }
 
     @Test
     void testWrongTypeInShape() {
-        var schemas = new HashMap<String, BaseSchema>();
+        var schemas = new HashMap<String, BaseSchema<String>>();
         var testMap = new HashMap<String, Object>();
 
         schemas.put("firstName", validator.string().required());

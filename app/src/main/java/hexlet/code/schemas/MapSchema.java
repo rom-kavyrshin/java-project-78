@@ -6,9 +6,9 @@ import java.util.function.BiPredicate;
 
 public class MapSchema extends BaseSchema<Map<String, Object>> {
 
-    private final BiPredicate<Integer, Map<String, Object>> notNullTest = (ignore, test) -> test != null;
-    private final BiPredicate<Integer, Map<String, Object>> sizeofTest = (exactSize, test) -> test.size() == exactSize;
-    private final BiPredicate<Map<String, BaseSchema>, Map<String, Object>> shapeTest =
+    private final BiPredicate<Integer, Map<String, String>> notNullTest = (ignore, test) -> test != null;
+    private final BiPredicate<Integer, Map<String, String>> sizeofTest = (exactSize, test) -> test.size() == exactSize;
+    private final BiPredicate<Map<String, BaseSchema<String>>, Map<String, String>> shapeTest =
             (schemas, test) -> {
                 return test.entrySet()
                         .stream()
@@ -22,7 +22,7 @@ public class MapSchema extends BaseSchema<Map<String, Object>> {
                         });
             };
 
-    private final LinkedHashMap<String, ValidationProperty<?, Map<String, Object>>> linkedHashMap =
+    private final LinkedHashMap<String, ValidationProperty<?, Map<String, String>>> linkedHashMap =
             new LinkedHashMap<>();
 
     public MapSchema required() {
@@ -35,7 +35,7 @@ public class MapSchema extends BaseSchema<Map<String, Object>> {
         return this;
     }
 
-    public MapSchema shape(Map<String, BaseSchema> schemas) {
+    public MapSchema shape(Map<String, BaseSchema<String>> schemas) {
         linkedHashMap.put("shape", new ValidationProperty<>(schemas, shapeTest));
         return this;
     }
