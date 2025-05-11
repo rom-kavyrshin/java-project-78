@@ -2,17 +2,17 @@ package hexlet.code.schemas;
 
 import java.util.function.BiPredicate;
 
-public class ValidationProperty<T, U> {
+public final class ValidationProperty<T, U> {
 
-    private final T property;
-    private final BiPredicate<T, U> callback;
+    private final T validationCriteria;
+    private final BiPredicate<T, U> predicate;
 
-    public ValidationProperty(T property, BiPredicate<T, U> callback) {
-        this.property = property;
-        this.callback = callback;
+    public ValidationProperty(T criteria, BiPredicate<T, U> validator) {
+        this.validationCriteria = criteria;
+        this.predicate = validator;
     }
 
     public boolean test(U u) {
-        return callback.test(property, u);
+        return predicate.test(validationCriteria, u);
     }
 }

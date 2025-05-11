@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestNumberSchema {
 
-    NumberSchema schema;
+    private NumberSchema schema;
 
     @BeforeEach
     void beforeEach() {

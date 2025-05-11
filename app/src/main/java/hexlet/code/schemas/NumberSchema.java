@@ -5,7 +5,7 @@ import hexlet.code.Pair;
 import java.util.LinkedHashMap;
 import java.util.function.BiPredicate;
 
-public class NumberSchema extends BaseSchema<Integer> {
+public final class NumberSchema extends BaseSchema<Integer> {
 
     public static final String REQUIRED_TEST_KEY = "required";
     public static final String POSITIVE_TEST_KEY = "positive";

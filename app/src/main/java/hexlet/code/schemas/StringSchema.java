@@ -3,7 +3,7 @@ package hexlet.code.schemas;
 import java.util.LinkedHashMap;
 import java.util.function.BiPredicate;
 
-public class StringSchema extends BaseSchema<String> {
+public final class StringSchema extends BaseSchema<String> {
 
     public static final String REQUIRED_TEST_KEY = "required";
     public static final String MIN_LENGTH_TEST_KEY = "minLength";

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestStringSchema {
 
-    StringSchema schema;
+    private StringSchema schema;
 
     @BeforeEach
     void beforeEach() {

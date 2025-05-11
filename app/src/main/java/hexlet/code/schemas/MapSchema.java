@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
-public class MapSchema extends BaseSchema<Map<String, Object>> {
+public final class MapSchema extends BaseSchema<Map<String, Object>> {
 
     public static final String REQUIRED_TEST_KEY = "required";
     public static final String SIZEOF_TEST_KEY = "sizeof";
