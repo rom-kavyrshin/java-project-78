@@ -94,6 +94,13 @@ class TestNumberSchema {
     }
 
     @Test
+    void testNullWithoutRequired() {
+        schema.positive().range(5, 10);
+
+        assertTrue(schema.isValid(null));
+    }
+
+    @Test
     void callValidatorsSeveralTimeTest() {
         schema.required();
 
