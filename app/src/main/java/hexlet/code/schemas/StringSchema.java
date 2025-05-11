@@ -5,9 +5,9 @@ import java.util.function.BiPredicate;
 
 public class StringSchema extends BaseSchema<String> {
 
-    public static String REQUIRED_TEST_KEY = "required";
-    public static String MIN_LENGTH_TEST_KEY = "minLength";
-    public static String CONTAINS_TEST_KEY = "contains";
+    public static final String REQUIRED_TEST_KEY = "required";
+    public static final String MIN_LENGTH_TEST_KEY = "minLength";
+    public static final String CONTAINS_TEST_KEY = "contains";
 
     private final BiPredicate<Boolean, String> notNullTest = (ignore, test) -> test != null && !test.isEmpty();
     private final BiPredicate<Integer, String> minLengthTest = (minLength, test) -> test.length() >= minLength;

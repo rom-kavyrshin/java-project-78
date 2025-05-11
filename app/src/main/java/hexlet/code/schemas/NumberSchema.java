@@ -7,9 +7,9 @@ import java.util.function.BiPredicate;
 
 public class NumberSchema extends BaseSchema<Integer> {
 
-    public static String REQUIRED_TEST_KEY = "required";
-    public static String POSITIVE_TEST_KEY = "positive";
-    public static String RANGE_TEST_KEY = "range";
+    public static final String REQUIRED_TEST_KEY = "required";
+    public static final String POSITIVE_TEST_KEY = "positive";
+    public static final String RANGE_TEST_KEY = "range";
 
     private final BiPredicate<Integer, Integer> notNullTest = (ignore, test) -> test != null;
     private final BiPredicate<Integer, Integer> positiveTest = (ignore, test) -> test > 0;

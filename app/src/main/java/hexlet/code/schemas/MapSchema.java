@@ -6,9 +6,9 @@ import java.util.function.BiPredicate;
 
 public class MapSchema extends BaseSchema<Map<String, Object>> {
 
-    public static String REQUIRED_TEST_KEY = "required";
-    public static String SIZEOF_TEST_KEY = "sizeof";
-    public static String SHAPE_TEST_KEY = "shape";
+    public static final String REQUIRED_TEST_KEY = "required";
+    public static final String SIZEOF_TEST_KEY = "sizeof";
+    public static final String SHAPE_TEST_KEY = "shape";
 
     private final BiPredicate<Integer, Map<String, String>> notNullTest = (ignore, test) -> test != null;
     private final BiPredicate<Integer, Map<String, String>> sizeofTest = (exactSize, test) -> test.size() == exactSize;
