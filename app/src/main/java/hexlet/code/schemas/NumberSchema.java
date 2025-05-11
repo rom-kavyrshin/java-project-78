@@ -35,6 +35,9 @@ public class NumberSchema extends BaseSchema<Integer> {
 
     @Override
     public boolean isValid(Object object) {
+        if (object == null && !linkedHashMap.containsKey(REQUIRED_TEST_KEY)) {
+            return true;
+        }
         if (!(object instanceof Integer) && object != null) {
             return false;
         }
