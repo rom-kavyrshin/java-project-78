@@ -6,6 +6,10 @@ import java.util.function.BiPredicate;
 
 public class MapSchema extends BaseSchema<Map<String, Object>> {
 
+    public static String REQUIRED_TEST_KEY = "required";
+    public static String SIZEOF_TEST_KEY = "sizeof";
+    public static String SHAPE_TEST_KEY = "shape";
+
     private final BiPredicate<Integer, Map<String, String>> notNullTest = (ignore, test) -> test != null;
     private final BiPredicate<Integer, Map<String, String>> sizeofTest = (exactSize, test) -> test.size() == exactSize;
     private final BiPredicate<Map<String, BaseSchema<String>>, Map<String, String>> shapeTest =
@@ -26,17 +30,17 @@ public class MapSchema extends BaseSchema<Map<String, Object>> {
             new LinkedHashMap<>();
 
     public MapSchema required() {
-        linkedHashMap.putFirst("required", new ValidationProperty<>(1, notNullTest));
+        linkedHashMap.putFirst(REQUIRED_TEST_KEY, new ValidationProperty<>(1, notNullTest));
         return this;
     }
 
     public MapSchema sizeof(int size) {
-        linkedHashMap.put("sizeof", new ValidationProperty<>(size, sizeofTest));
+        linkedHashMap.put(SIZEOF_TEST_KEY, new ValidationProperty<>(size, sizeofTest));
         return this;
     }
 
     public MapSchema shape(Map<String, BaseSchema<String>> schemas) {
-        linkedHashMap.put("shape", new ValidationProperty<>(schemas, shapeTest));
+        linkedHashMap.put(SHAPE_TEST_KEY, new ValidationProperty<>(schemas, shapeTest));
         return this;
     }
 
